@@ -10,7 +10,7 @@ export default function Landing() {
   const [user, setUser] = useState("");
 
   function handleNavigateToProfile() {
-    alert(`Hello world, ${user}`);
+    navigate("Profile", { name: user });
   }
   return (
     <View style={styles.container}>
