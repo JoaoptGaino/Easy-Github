@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./styles";
 import landing from "../../assets/images/landing.png";
@@ -7,16 +7,17 @@ import { RectButton, TextInput } from "react-native-gesture-handler";
 import { FontAwesome } from "@expo/vector-icons";
 export default function Landing() {
   const { navigate } = useNavigation();
+  const [user, setUser] = useState("");
 
   function handleNavigateToProfile() {
-    alert("Hello world caralho");
+    navigate("Profile", { name: user });
   }
   return (
     <View style={styles.container}>
       <Image source={landing} style={styles.banner} />
       <Text style={styles.title}>
         Welcome to {"\n"} <Text style={styles.titleBold}>EasyGithub</Text>
-        <FontAwesome name="github-alt"  size={50} />
+        <FontAwesome name="github-alt" size={50} />
       </Text>
       <View style={styles.searchForm}>
         <View style={styles.inputGroup}>
@@ -25,11 +26,14 @@ export default function Landing() {
               style={styles.input}
               placeholder="Username"
               placeholderTextColor="#000"
+              onChangeText={(text) => setUser(text)}
             />
           </View>
         </View>
-        <RectButton style={styles.submitButton}>
-         
+        <RectButton
+          style={styles.submitButton}
+          onPress={handleNavigateToProfile}
+        >
           <Text style={styles.submitButtonText}>Search</Text>
         </RectButton>
       </View>
